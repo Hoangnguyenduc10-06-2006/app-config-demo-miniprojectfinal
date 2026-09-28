@@ -1,0 +1,12 @@
+
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/shopmart_order?createDatabaseIfNotExist=true
+    username: root
+    password: Hoangduc2006
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false  
