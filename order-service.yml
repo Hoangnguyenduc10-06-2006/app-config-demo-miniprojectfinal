@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: order-service
@@ -9,4 +8,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false  
+    show-sql: false
+
+# Cấu hình Circuit Breaker của Resilience4j
+resilience4j:
+  circuitbreaker:
+    instances:
+      inventoryCB: # Khớp với @CircuitBreaker(name = "inventoryCB") trong file OrderServiceImpl.java
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 10 # Quan sát 10 request gần nhất
+        minimum-number-of-calls: 5 # Cần tối thiểu 5 request để bắt đầu tính tỷ lệ lỗi
+        failure-rate-threshold: 50 # Tỷ lệ lỗi >= 50% thì chuyển sang OPEN
+        wait-duration-in-open-state: 15s # Chờ 15 giây ở trạng thái OPEN trước khi sang HALF-OPEN
+        permitted-number-of-calls-in-half-open-state: 3 # Cho phép 3 request thử nghiệm khi HALF-OPEN
+        automatic-transition-from-open-to-half-open-enabled: true
