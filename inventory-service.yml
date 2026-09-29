@@ -5,7 +5,7 @@ spring:
   application:
     name: inventory-service
   datasource:
-    url: jdbc:mysql://localhost:3306/shopmart_inventory?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/shopmart_inventory?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
     username: root
     password: Hoangduc2006
   jpa:
@@ -16,3 +16,12 @@ spring:
   sql:
     init:
       mode: always
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000ms # 10 phút (thêm ms để chỉ rõ đơn vị mili-giây)
+      cache-null-values: false # Tránh cache giá trị null nếu cần
