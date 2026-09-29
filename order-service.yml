@@ -14,7 +14,7 @@ spring:
 resilience4j:
   circuitbreaker:
     instances:
-      inventoryCB: # Khớp với @CircuitBreaker(name = "inventoryCB") trong file OrderServiceImpl.java
+      inventoryService: # Khớp với @CircuitBreaker(name = "inventoryCB") trong file OrderServiceImpl.java
         sliding-window-type: COUNT_BASED
         sliding-window-size: 10 # Quan sát 10 request gần nhất
         minimum-number-of-calls: 5 # Cần tối thiểu 5 request để bắt đầu tính tỷ lệ lỗi
